@@ -3,7 +3,7 @@ import fitz
 import docx
 from openai import OpenAI
 
-client = OpenAI(api_key="add-your-api-key")
+client = OpenAI(api_key=""add-your-api-key"")
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QPushButton, QLabel, QFileDialog
 
 #setting up open ai key 
@@ -15,6 +15,7 @@ class ChatBot(QWidget):
 
     def initUI(self):
         self.setWindowTitle("Resume Evaluation Chatbot")
+        self.setFixedSize(400, 600)
         self.layout = QVBoxLayout()
         print("111111")
         #ToDo allow user to attach the resume , analyse resume and match
@@ -65,14 +66,15 @@ class ChatBot(QWidget):
             user_input = f"Resume:\n{resume}\n\nDesignation:\n{designation}\n\nSkills:\n{', '.join(skills)}"
             messages = [
                 {"role":"system", "content":"You are a helpful assstant."},
-                {"role":"user", "content":f"Evaluate if the following resume is fit for the given designation and matches the required skills:\n\n{user_input}\n\nProvide your evaluation:"}
+                {"role":"user", "content":f"If the given text is Resume then Evaluate if the following resume is fit for the given \
+                 designation and matches the required skills:\n\n{user_input}\n\n Check if designation matches in resume Provide your evaluation, If the given text is not resume then reply I am a bot assistant to analyse resume, If skills doesn't match then mention Required skills doesn't match completely"}
             ]
 
         else:
             user_input = f"Resume:\n{resume}\n\nDesignation:\n{designation}\n"
             messages = [
                 {"role":"system", "content":"You are a helpful assstant."},
-                {"role":"user", "content":f"Evaluate if the following resume is good fit for the given designation:\n\n{user_input}\n\n Provide your evaluation:"}]
+                {"role":"user", "content":f"If the given text is Resume then Evaluate if the following resume is good fit for the given designation:\n\n{user_input}\n\n Check if designation matches in resume Provide your evaluation, If the given text is not resume then reply I am a bot assistant to analyse resume"}]
 
 
         response = self.get_openai_response(messages)
