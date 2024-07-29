@@ -1,3 +1,5 @@
+#Resume Analyzer Chatbot Assistant using Langchain API's , python, pyqt5 to query input resume to chatbot 
+
 import sys
 import fitz
 import docx
